@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
 	cout << "Windy" << endl; // prints Windy
 	return 0;
 }
