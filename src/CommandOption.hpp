@@ -12,10 +12,16 @@
 #include <vector>
 using namespace std;
 
+int findFirstOptionInArray(const int argc, const char *argv[],
+		const std::string &option);
+
+int findFirstOptionInVector(const std::vector<std::string> &out,
+		const std::string &option);
+
 std::string getCmdOption(const int argc, const char *argv[],
 		const std::string &option);
 
-std::string getCmdOptionStr(const std::vector<std::string> &out,
+std::string getCmdOptionVec(const std::vector<std::string> &out,
 		const std::string &option);
 
 int tokenize(std::string const &str, const char delim,

@@ -9,6 +9,52 @@
 
 /**
  * Searches an array of character strings, like command line arguments, and locates the named option
+ * returning the index of the option in the array.
+ *
+ * See getCmdOption
+ */
+int findFirstOptionInArray(const int argc, const char *argv[],
+		const std::string &option) {
+	int idx = -1;
+	if (argc < 1) {
+		return idx;
+	}
+
+	for (int i = 0; i < argc; ++i) {
+		std::string arg = argv[i];
+		if (0 == arg.find(option)) {
+			idx = i;
+			break;
+		}
+	}
+	return idx;
+}
+
+/**
+ * Searches an vector of strings and locates the named option
+ * returning the index of the option in the vector.
+ *
+ * See getCmdOption
+ */
+int findFirstOptionInVector(const std::vector<std::string> &out,
+		const std::string &option) {
+	int idx = -1;
+	const int argc = out.size();
+	if (argc < 1) {
+		return idx;
+	}
+
+	for (int i = 0; i < argc; ++i) {
+		std::string arg = out[i];
+		if (0 == arg.find(option)) {
+			idx = i;
+		}
+	}
+	return idx;
+}
+
+/**
+ * Searches an array of character strings, like command line arguments, and locates the named option
  *
  * Adapted directly from https://gist.github.com/plasticbox/3708a6cdfbece8cd224487f9ca9794cd
  *
@@ -16,6 +62,7 @@
  * // simple.exe -ip="127.0.0.1" -port=1000
  * std::string ip = getCmdOption(argc, argv, "-ip=");
  * std::string port = getCmdOption(argc, argv, "-port=");
+ *
  */
 std::string getCmdOption(const int argc, const char *argv[],
 		const std::string &option) {
@@ -28,7 +75,7 @@ std::string getCmdOption(const int argc, const char *argv[],
 		std::string arg = argv[i];
 		if (0 == arg.find(option)) {
 			std::size_t found = arg.find_first_of(option);
-			cmd = arg.substr(found);
+			cmd = arg.substr(found + 1);
 			return cmd;
 		}
 	}
@@ -40,7 +87,7 @@ std::string getCmdOption(const int argc, const char *argv[],
  *
  * See getCmdOption
  */
-std::string getCmdOptionStr(const std::vector<std::string> &out,
+std::string getCmdOptionVec(const std::vector<std::string> &out,
 		const std::string &option) {
 	std::string cmd;
 	const int argc = out.size();
@@ -52,7 +99,7 @@ std::string getCmdOptionStr(const std::vector<std::string> &out,
 		std::string arg = out[i];
 		if (0 == arg.find(option)) {
 			std::size_t found = arg.find_first_of(option);
-			cmd = arg.substr(found);
+			cmd = arg.substr(found + 1);
 			return cmd;
 		}
 	}
