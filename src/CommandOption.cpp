@@ -16,16 +16,43 @@
  * // simple.exe -ip="127.0.0.1" -port=1000
  * std::string ip = getCmdOption(argc, argv, "-ip=");
  * std::string port = getCmdOption(argc, argv, "-port=");
- *
  */
 std::string getCmdOption(const int argc, const char *argv[],
 		const std::string &option) {
 	std::string cmd;
+	if (argc < 1) {
+		return cmd;
+	}
+
 	for (int i = 0; i < argc; ++i) {
 		std::string arg = argv[i];
 		if (0 == arg.find(option)) {
 			std::size_t found = arg.find_first_of(option);
-			cmd = arg.substr(found + 1);
+			cmd = arg.substr(found);
+			return cmd;
+		}
+	}
+	return cmd;
+}
+
+/**
+ * Searches a VECTOR strings, like command line arguments, and locates the named option
+ *
+ * See getCmdOption
+ */
+std::string getCmdOptionStr(const std::vector<std::string> &out,
+		const std::string &option) {
+	std::string cmd;
+	const int argc = out.size();
+	if (argc < 1) {
+		return cmd;
+	}
+
+	for (int i = 0; i < argc; ++i) {
+		std::string arg = out[i];
+		if (0 == arg.find(option)) {
+			std::size_t found = arg.find_first_of(option);
+			cmd = arg.substr(found);
 			return cmd;
 		}
 	}

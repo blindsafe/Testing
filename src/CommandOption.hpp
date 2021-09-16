@@ -15,6 +15,9 @@ using namespace std;
 std::string getCmdOption(const int argc, const char *argv[],
 		const std::string &option);
 
+std::string getCmdOptionStr(const std::vector<std::string> &out,
+		const std::string &option);
+
 int tokenize(std::string const &str, const char delim,
 		std::vector<std::string> &out);
 
