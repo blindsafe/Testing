@@ -4,10 +4,8 @@
  *  Created on: Sep 15, 2021
  *      Author: Donald Trummell
  */
-#include <iostream>
-#include <string>
-#include <vector>
-using namespace std;
+
+#include "CommandOption.hpp"
 
 /**
  * Searches an array of character strings, like command line arguments, and locates the named option
@@ -35,17 +33,21 @@ std::string getCmdOption(const int argc, const char *argv[],
 }
 
 /**
- * Split a string into tokens based on a delimiter character
+ * Split a string into tokens based on a delimiter character. See
+ * https://www.techiedelight.com/convert-vector-to-array-cpp/ for extracting
+ * an array from a vector
  *
- * Adapted directly from https://www.techiedelight.com/split-string-cpp-using-delimiter/
+ * Adapted directly from https://www.techiedelight.com/split-string-cpp-using-delimiter
  */
-void tokenize(std::string const &str, const char delim,
+int tokenize(std::string const &str, const char delim,
 		std::vector<std::string> &out) {
 	size_t start;
 	size_t end = 0;
-
+	int nadded = 0;
 	while ((start = str.find_first_not_of(delim, end)) != std::string::npos) {
 		end = str.find(delim, start);
 		out.push_back(str.substr(start, end - start));
+		nadded++;
 	}
+	return nadded;
 }
