@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
 	option_finder_test_vec("second arg", cmd_line, ' ', "-port=");
 	option_finder_test_vec("first arg", cmd_line, ' ', "-ip=");
 
+	system("pause");
+
 	return 0;
 }
 

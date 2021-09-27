@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <windows.h>
 using namespace std;
 
 int findFirstOptionInArray(const int argc, const char *argv[],
